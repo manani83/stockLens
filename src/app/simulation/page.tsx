@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { DataSourceNotice } from "@/components/data";
+import { AffiliateDisclosure, AdPlaceholder } from "@/components/monetization";
 import { DividendSimulationForm } from "@/components/simulation";
 import { InternalLinkSection } from "@/components/seo/InternalLinkSection";
 import { buildPageTitle } from "@/lib/seo";
@@ -23,12 +25,15 @@ export default function SimulationPage() {
         </p>
       </section>
       <DividendSimulationForm />
+      <DataSourceNotice />
+      <AdPlaceholder slotName="simulation-result-summary" />
       <section className="rounded-lg border border-amber-200 bg-amber-50 p-5 text-sm leading-6 text-amber-950">
         본 시뮬레이션은 단순 가정에 따른 계산 결과이며 실제 수익률, 배당금,
         환율, 세금, ETF 운용 정책에 따라 달라질 수 있습니다. 투자 판단의 최종
         책임은 투자자 본인에게 있습니다.
       </section>
       <InternalLinkSection />
+      <AffiliateDisclosure />
     </main>
   );
 }

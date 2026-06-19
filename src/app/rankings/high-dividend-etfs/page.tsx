@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { DataFreshnessNotice } from "@/components/data";
+import { AffiliateDisclosure, AdPlaceholder } from "@/components/monetization";
 import { ETFRankingTable, RankingIntro } from "@/components/rankings";
 import { InternalLinkSection } from "@/components/seo/InternalLinkSection";
 import { getAllEtfs } from "@/domain/etf/etfRepository";
@@ -20,8 +22,11 @@ export default function HighDividendEtfsPage() {
         title="고배당 ETF 순위"
         description="배당률이 높은 ETF를 확인하되, 높은 배당률이 항상 좋은 투자를 의미하지는 않습니다."
       />
+      <DataFreshnessNotice dataAsOf={etfs[0]?.dataAsOf} />
       <ETFRankingTable etfs={etfs} />
+      <AdPlaceholder slotName="high-dividend-rankings-table-bottom" />
       <InternalLinkSection />
+      <AffiliateDisclosure />
     </main>
   );
 }

@@ -1,10 +1,17 @@
 import type { MetadataRoute } from "next";
+import { getAllGuideArticles } from "@/domain/content/contentRepository";
 import { getAllEtfs } from "@/domain/etf/etfRepository";
 import { getSiteUrl } from "@/lib/siteUrl";
 
 const staticPaths = [
   { path: "/", priority: 1.0 },
   { path: "/compare", priority: 0.8 },
+  { path: "/calendar", priority: 0.8 },
+  { path: "/alerts", priority: 0.7 },
+  { path: "/portfolio", priority: 0.8 },
+  { path: "/portfolio/calendar", priority: 0.7 },
+  { path: "/settings/backup", priority: 0.5 },
+  { path: "/guides", priority: 0.7 },
   { path: "/rankings", priority: 0.8 },
   { path: "/rankings/monthly-dividend-etfs", priority: 0.8 },
   { path: "/rankings/high-dividend-etfs", priority: 0.8 },
@@ -40,6 +47,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: "monthly" as const,
       priority: 0.7,
+    })),
+    ...getAllGuideArticles().map((article) => ({
+      url: `${siteUrl}/guides/${article.slug}`,
+      lastModified: new Date(article.updatedAt),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
     })),
   ];
 }

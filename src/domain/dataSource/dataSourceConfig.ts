@@ -1,0 +1,55 @@
+import type { DataSourceConfig } from "./dataSourceTypes";
+
+export const dataSourceConfigs: DataSourceConfig[] = [
+  {
+    type: "Static",
+    status: "Active",
+    name: "Static ETF Data",
+    description: "MVP에서 사용하는 정적 ETF 기본 데이터입니다.",
+    updateCycle: "수동 검토 시 갱신",
+    requiresApiKey: false,
+    notes: "src/data/etfData.ts에서 관리합니다.",
+  },
+  {
+    type: "Static",
+    status: "Active",
+    name: "Static Calendar Data",
+    description: "MVP에서 사용하는 정적 배당/이벤트 캘린더 예시 데이터입니다.",
+    updateCycle: "수동 검토 시 갱신",
+    requiresApiKey: false,
+    notes: "src/data/calendarData.ts에서 관리합니다.",
+  },
+  {
+    type: "Manual",
+    status: "Planned",
+    name: "Manual ETF Update",
+    description: "운용사 공식 자료를 확인한 뒤 사람이 정적 데이터를 갱신합니다.",
+    updateCycle: "월 1회 후보",
+    requiresApiKey: false,
+  },
+  {
+    type: "Csv",
+    status: "Planned",
+    name: "CSV Import",
+    description: "검증된 CSV 파일을 통해 ETF/배당 데이터를 갱신하는 방식입니다.",
+    updateCycle: "필요 시 업로드",
+    requiresApiKey: false,
+  },
+  {
+    type: "ExternalApi",
+    status: "Planned",
+    name: "External Finance API",
+    description: "외부 금융 데이터 API를 통해 가격, 배당, 분배금 데이터를 가져오는 방식입니다.",
+    updateCycle: "일 단위 또는 월 단위 후보",
+    requiresApiKey: true,
+    notes: "약관, 호출 제한, 상업적 사용 가능 여부 검토가 필요합니다.",
+  },
+  {
+    type: "AdminManaged",
+    status: "Planned",
+    name: "Admin Managed Data",
+    description: "관리자 화면에서 검증된 ETF 데이터를 관리하는 방식입니다.",
+    updateCycle: "관리자 승인 시 갱신",
+    requiresApiKey: false,
+  },
+];

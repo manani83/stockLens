@@ -1,5 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { DataFreshnessNotice } from "@/components/data";
+import { AffiliateDisclosure, AdPlaceholder } from "@/components/monetization";
 import { ETFRankingFilters, RankingIntro } from "@/components/rankings";
 import { InternalLinkSection } from "@/components/seo/InternalLinkSection";
 import { getAllEtfs } from "@/domain/etf/etfRepository";
@@ -19,6 +21,8 @@ const rankingLinks = [
 ];
 
 export default function RankingsPage() {
+  const etfs = getAllEtfs();
+
   return (
     <main className="page-shell grid gap-6 py-8 sm:py-10">
       <RankingIntro
@@ -35,8 +39,11 @@ export default function RankingsPage() {
           ))}
         </div>
       </section>
-      <ETFRankingFilters etfs={getAllEtfs()} />
+      <DataFreshnessNotice dataAsOf={etfs[0]?.dataAsOf} />
+      <ETFRankingFilters etfs={etfs} />
+      <AdPlaceholder slotName="rankings-table-bottom" />
       <InternalLinkSection />
+      <AffiliateDisclosure />
     </main>
   );
 }

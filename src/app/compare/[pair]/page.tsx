@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { NotFoundState } from "@/components/common";
 import {
   ETFCompareCard,
   ETFCompareSummary,
   ETFCompareTable,
 } from "@/components/compare";
+import { DataSourceNotice } from "@/components/data";
+import { BrokerAffiliateBox } from "@/components/monetization";
 import { parseComparePair } from "@/domain/compare/compareService";
 import { getEtfByTicker } from "@/domain/etf/etfRepository";
 import { InternalLinkSection } from "@/components/seo/InternalLinkSection";
@@ -48,17 +52,21 @@ export default async function ComparePairPage({ params }: ComparePairPageProps) 
 
   if (!parsedPair || !first || !second || first.ticker === second.ticker) {
     return (
-      <main className="page-shell py-8 sm:py-10">
-        <section className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-          <p className="text-sm font-bold text-teal-700">Compare</p>
-          <h1 className="mt-2 text-3xl font-bold text-slate-950">
-            비교할 ETF 정보를 찾을 수 없습니다
-          </h1>
-          <p className="mt-4 text-base leading-7 text-slate-600">
-            URL은 schd-vs-jepi 형식이어야 하며, 현재 MVP 기본 ETF 데이터에
-            포함된 티커만 비교할 수 있습니다.
-          </p>
-        </section>
+      <main className="page-shell grid gap-4 py-8 sm:py-10">
+        <NotFoundState
+          title="비교할 ETF 정보를 찾을 수 없습니다"
+          description="URL은 schd-vs-jepi 형식이어야 하며, 서로 다른 MVP 기본 ETF 티커만 비교할 수 있습니다."
+          actionLabel="ETF 비교 페이지로 이동"
+          actionHref="/compare"
+        />
+        <div className="flex flex-wrap gap-3">
+          <Link className="rounded-md border border-slate-300 px-4 py-2 text-sm font-bold text-slate-700 transition hover:bg-slate-50" href="/rankings">
+            ETF 랭킹
+          </Link>
+          <Link className="rounded-md border border-slate-300 px-4 py-2 text-sm font-bold text-slate-700 transition hover:bg-slate-50" href="/">
+            메인 페이지
+          </Link>
+        </div>
       </main>
     );
   }
@@ -81,6 +89,8 @@ export default async function ComparePairPage({ params }: ComparePairPageProps) 
       </section>
       <ETFCompareSummary first={first} second={second} />
       <ETFCompareTable first={first} second={second} />
+      <DataSourceNotice />
+      <BrokerAffiliateBox />
       <InternalLinkSection />
     </main>
   );

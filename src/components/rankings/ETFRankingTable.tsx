@@ -40,10 +40,10 @@ export function ETFRankingTable({ etfs }: ETFRankingTableProps) {
                 <td className="px-3 py-3">
                   <div className="flex gap-2">
                     <Link className="font-bold text-teal-700" href={`/etf/${etf.ticker.toLowerCase()}`}>
-                      상세
+                      {etf.ticker} 상세
                     </Link>
                     <Link className="font-bold text-teal-700" href={`/compare/schd-vs-${etf.ticker.toLowerCase()}`}>
-                      비교
+                      SCHD와 비교
                     </Link>
                   </div>
                 </td>

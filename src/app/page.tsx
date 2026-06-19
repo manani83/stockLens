@@ -4,6 +4,7 @@ import { DividendCalculator } from "@/components/dividend";
 import { DisclaimerBox } from "@/components/common/DisclaimerBox";
 import { SectionHeader } from "@/components/common/SectionHeader";
 import { PopularETFSection } from "@/components/etf";
+import { AffiliateDisclosure, AdPlaceholder } from "@/components/monetization";
 import { InternalLinkSection } from "@/components/seo/InternalLinkSection";
 import { WatchlistPanel } from "@/components/watchlist";
 import { buildPageTitle } from "@/lib/seo";
@@ -48,6 +49,8 @@ export default function Home() {
           />
           <PopularETFSection />
         </section>
+
+        <AdPlaceholder slotName="home-popular-etfs" />
 
         <section className="grid gap-4">
           <SectionHeader
@@ -96,6 +99,66 @@ export default function Home() {
               ETF 랭킹 보기
             </Link>
           </div>
+          <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+            <h2 className="text-2xl font-bold text-slate-950">
+              배당락/실적 캘린더
+            </h2>
+            <p className="mt-3 text-base leading-7 text-slate-600">
+              주요 ETF의 배당락일, 배당 지급일, 리밸런싱 같은 정적 예시 일정을
+              확인할 수 있습니다.
+            </p>
+            <Link className="mt-4 inline-flex rounded-md border border-slate-300 px-4 py-2 text-sm font-bold text-slate-700" href="/calendar">
+              캘린더 보기
+            </Link>
+          </div>
+          <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+            <h2 className="text-2xl font-bold text-slate-950">
+              가격/배당 알림 규칙
+            </h2>
+            <p className="mt-3 text-base leading-7 text-slate-600">
+              실제 알림 발송 없이 목표 가격, 배당률, 배당 일정 조건을
+              브라우저에 저장해볼 수 있습니다.
+            </p>
+            <Link className="mt-4 inline-flex rounded-md border border-slate-300 px-4 py-2 text-sm font-bold text-slate-700" href="/alerts">
+              알림 규칙 보기
+            </Link>
+          </div>
+          <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+            <h2 className="text-2xl font-bold text-slate-950">
+              내 배당 포트폴리오
+            </h2>
+            <p className="mt-3 text-base leading-7 text-slate-600">
+              보유 ETF와 투자금을 브라우저에 저장하고 예상 세후 월 배당금을
+              참고용으로 계산할 수 있습니다.
+            </p>
+            <Link className="mt-4 inline-flex rounded-md border border-slate-300 px-4 py-2 text-sm font-bold text-slate-700" href="/portfolio">
+              포트폴리오 보기
+            </Link>
+          </div>
+          <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+            <h2 className="text-2xl font-bold text-slate-950">
+              포트폴리오 배당 캘린더
+            </h2>
+            <p className="mt-3 text-base leading-7 text-slate-600">
+              저장한 ETF 기준으로 관련 배당락일과 배당 지급일 예시 일정을
+              모아볼 수 있습니다.
+            </p>
+            <Link className="mt-4 inline-flex rounded-md border border-slate-300 px-4 py-2 text-sm font-bold text-slate-700" href="/portfolio/calendar">
+              내 배당 캘린더 보기
+            </Link>
+          </div>
+          <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+            <h2 className="text-2xl font-bold text-slate-950">
+              데이터 백업/복원
+            </h2>
+            <p className="mt-3 text-base leading-7 text-slate-600">
+              브라우저에 저장된 관심종목, 알림 규칙, 포트폴리오 데이터를 JSON
+              파일로 관리할 수 있습니다.
+            </p>
+            <Link className="mt-4 inline-flex rounded-md border border-slate-300 px-4 py-2 text-sm font-bold text-slate-700" href="/settings/backup">
+              백업/복원 보기
+            </Link>
+          </div>
         </section>
 
         <InternalLinkSection />
@@ -108,6 +171,7 @@ export default function Home() {
             책임은 투자자 본인에게 있습니다.
           </DisclaimerBox>
         </section>
+        <AffiliateDisclosure />
       </div>
     </main>
   );

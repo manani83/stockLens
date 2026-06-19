@@ -33,4 +33,6 @@ export type ETFDividendInfo = {
   strengths: string[];
   weaknesses: string[];
   suitableFor: string[];
+  dataAsOf?: string;
+  dataNote?: string;
 };

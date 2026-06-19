@@ -8,6 +8,7 @@ import {
 import type { DividendInput } from "@/domain/dividend/dividendTypes";
 import { getEtfByTicker } from "@/domain/etf/etfRepository";
 import { formatPercent } from "@/lib/format";
+import { FormErrorMessage } from "../common";
 import { ETFSelect } from "../etf";
 import { DividendDisclaimer } from "./DividendDisclaimer";
 import {
@@ -89,11 +90,7 @@ export function DividendCalculator({ initialTicker = DEFAULT_TICKER }: DividendC
         <ETFSelect selectedTicker={selectedTicker} onChange={handleTickerChange} />
         <DividendInputForm values={values} onChange={handleValueChange} />
 
-        {validationErrors.length > 0 ? (
-          <div className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-900">
-            {validationErrors.map((error) => error.message).join(" ")}
-          </div>
-        ) : null}
+        <FormErrorMessage message={validationErrors.map((error) => error.message).join(" ")} />
 
         {result ? <DividendResultCard result={result} /> : null}
         <DividendDisclaimer />
