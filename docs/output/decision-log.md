@@ -1,0 +1,43 @@
+# 의사결정 로그
+
+## 2026-06-19
+
+- 서비스명을 Dividend Lab Korea로 정했다.
+- 초기 MVP는 배당금 계산기, ETF 기본 데이터, ETF 상세 페이지, 관심종목 워치리스트로 제한한다.
+- 로그인, DB, 실시간 API, 실시간 차트, 실제 푸시 알림은 초기 MVP에서 제외한다.
+- 관심종목은 초기 MVP에서 브라우저 localStorage에 저장한다.
+- Next.js App Router와 `src/app` 구조를 사용한다.
+- 배당 계산은 React, 브라우저, 날짜, localStorage에 의존하지 않는 순수 함수로 구현한다.
+- 배당률과 세율은 percent 입력값을 `normalizePercent`에서 decimal로 변환한다.
+- `calculateDividend`는 내부에서 입력값을 검증하고, 오류가 있으면 첫 검증 메시지들을 합쳐 `Error`로 전달한다.
+- 배당 금액 반올림과 통화 표시 포맷은 도메인 계산 함수가 아니라 이후 `src/lib/format.ts`에서 처리한다.
+- 배당 계산 테스트는 근사값 비교를 사용해 부동소수점 오차에 의존하지 않도록 한다.
+- ETF 데이터는 `src/data/etfData.ts`의 정적 배열로 관리하고, 모든 수치는 초기값이며 추후 검증 필요로 주석 처리한다.
+- ETF 조회 로직은 `src/domain/etf/etfRepository.ts`에 분리하며, 티커와 키워드 검색은 대소문자를 구분하지 않는다.
+- 관심종목 저장 key는 `dividend-lab-watchlist`로 고정한다.
+- 관심종목 storage 계층은 브라우저 환경이 아니면 빈 배열 반환 또는 no-op으로 처리해 SSR에서 `window is not defined` 오류가 나지 않게 한다.
+- 관심종목 service 계층은 ticker를 trim 후 대문자로 저장하고, ticker 기준 중복을 막는다.
+- 관심종목 테스트는 jsdom 대신 localStorage mock을 사용해 테스트 순서와 브라우저 환경에 의존하지 않게 한다.
+- 표시 포맷은 `src/lib/format.ts`의 순수 함수로 분리하고, 원화/달러/퍼센트는 `Intl.NumberFormat` 기반으로 처리한다.
+- 배당 계산기 UI는 컨테이너, 입력 폼, 결과 카드, 유의사항, ETF 선택 컴포넌트로 분리한다.
+- ETF 선택 변경 시 선택 ETF의 기본 배당률을 입력값에 반영하되, 아직 메인 페이지나 ETF 상세 페이지에는 연결하지 않는다.
+- ETF 상세 페이지는 `/etf/[ticker]`에서 정적 ETF 데이터를 조회하고, 존재하지 않는 ticker는 notFound 대신 사용자 안내 메시지를 표시한다.
+- ETF 상세 화면은 기본 정보, 핵심 정보 grid, 장점/단점, 적합 투자자, ETF 기준 배당 계산기, 투자 유의사항으로 구성한다.
+- `DividendCalculator`는 `initialTicker` prop을 받아 상세 페이지에서 해당 ETF의 기본 배당률을 초기값으로 사용할 수 있게 한다.
+- 관심종목 UI는 localStorage를 직접 서버에서 읽지 않도록 모두 클라이언트 컴포넌트로 작성한다.
+- 관심종목 버튼과 패널은 `dividend-lab-watchlist-updated` 브라우저 이벤트와 `storage` 이벤트를 구독해 같은 화면 안에서 즉시 상태를 갱신한다.
+- 메인 페이지는 배당 계산기, 인기 ETF 카드, 관심 ETF 패널, 2차 MVP 준비 섹션, 투자 유의사항을 한 화면에 조합한다.
+- 인기 ETF 카드는 상세 페이지 링크와 관심종목 추가 버튼을 함께 제공해 초기 MVP에서 관심종목을 추가할 수 있는 진입점을 만든다.
+- ETF 비교는 `/compare` 선택 페이지와 `/compare/[pair]` URL 기반 페이지로 제공한다.
+- 비교 URL은 `schd-vs-jepi` 형식의 `-vs-` 구분자를 사용하고, ticker는 대소문자를 구분하지 않는다.
+- ETF 비교 요약은 배당률, 운용보수, 월배당 여부, High 위험도 여부를 참고 문장으로 표시하되 투자 추천처럼 단정하지 않는다.
+- ETF 랭킹/스크리너는 정적 ETF 데이터를 기반으로 배당률, 운용보수, 배당주기, 카테고리, 위험도 필터를 제공한다.
+- 모바일에서는 랭킹 카드를 우선 표시하고, 데스크톱에서는 테이블을 표시한다.
+- 최종 MVP 검증은 `npm test`, `npm run lint`, `npm run build`, 주요 URL HTTP 응답 확인으로 수행한다.
+- 배당 재투자 시뮬레이션은 연 단위 단순 계산으로 구현하며, 실시간 가격이나 실제 분배금 이력을 사용하지 않는다.
+- 시뮬레이션의 배당 재투자는 세후 배당금만 재투자 금액에 포함한다.
+- 각 주요 페이지는 Next.js metadata 또는 generateMetadata를 사용해 title과 description을 명시한다.
+- ETF 상세과 비교 페이지는 ticker 기반 동적 metadata를 생성한다.
+- 내부 링크 섹션은 메인, ETF 상세, 비교, 랭킹, 시뮬레이션 주요 페이지에서 공통으로 사용한다.
+- sitemap은 `NEXT_PUBLIC_SITE_URL`을 우선 사용하고, 없으면 `http://localhost:3000`을 기본값으로 사용한다.
+- robots.txt는 모든 검색 엔진을 허용하고 sitemap URL을 제공한다.
