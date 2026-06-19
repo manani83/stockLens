@@ -2,6 +2,14 @@ import Link from "next/link";
 
 const internalLinks = [
   ["배당금 계산기", "/"],
+  ["배당락/실적 캘린더", "/calendar"],
+  ["가격/배당 알림 규칙", "/alerts"],
+  ["내 배당 포트폴리오", "/portfolio"],
+  ["내 포트폴리오 배당 캘린더", "/portfolio/calendar"],
+  ["데이터 백업/복원", "/settings/backup"],
+  ["배당 ETF 가이드", "/guides"],
+  ["월 배당금 계산 가이드", "/guides/how-to-calculate-monthly-dividend"],
+  ["SCHD와 JEPI 차이", "/guides/schd-vs-jepi-guide"],
   ["배당 재투자 시뮬레이션", "/simulation"],
   ["월배당 ETF 순위", "/rankings/monthly-dividend-etfs"],
   ["고배당 ETF 순위", "/rankings/high-dividend-etfs"],

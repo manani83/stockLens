@@ -40,4 +40,10 @@ describe("etfRepository", () => {
     expect(searchEtfs("")).toEqual(getAllEtfs());
     expect(searchEtfs("   ")).toEqual(getAllEtfs());
   });
+
+  it("모든 ETF 데이터에 기준일과 참고용 안내가 있다", () => {
+    expect(
+      getAllEtfs().every((etf) => etf.dataAsOf && etf.dataNote),
+    ).toBe(true);
+  });
 });

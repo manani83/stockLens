@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { getAllEtfs, getEtfByTicker } from "@/domain/etf/etfRepository";
 import { simulateDividendReinvestment } from "@/domain/simulation/dividendReinvestmentSimulator";
 import type { DividendSimulationInput } from "@/domain/simulation/simulationTypes";
+import { FormErrorMessage } from "../common";
 import { DividendSimulationResult } from "./DividendSimulationResult";
 
 const DEFAULT_TICKER = "SCHD";
@@ -136,11 +137,7 @@ export function DividendSimulationForm() {
           </label>
         </div>
       </section>
-      {result.error ? (
-        <div className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm font-bold text-red-900">
-          {result.error}
-        </div>
-      ) : null}
+      <FormErrorMessage message={result.error} />
       {result.value ? <DividendSimulationResult result={result.value} /> : null}
     </div>
   );

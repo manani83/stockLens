@@ -113,4 +113,16 @@ describe("watchlistService", () => {
 
     expect(getWatchlistItems()).toEqual([]);
   });
+
+  it("SSR 환경에서는 빈 배열 반환과 no-op으로 동작한다", () => {
+    Object.defineProperty(globalThis, "window", {
+      configurable: true,
+      value: undefined,
+    });
+
+    expect(getWatchlistItems()).toEqual([]);
+    expect(() => addWatchlistItem("SCHD")).not.toThrow();
+    expect(() => removeWatchlistItem("SCHD")).not.toThrow();
+    expect(getWatchlistItems()).toEqual([]);
+  });
 });

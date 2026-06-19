@@ -1,0 +1,6 @@
+ticker,name,issuer,category,dividendYieldPercent,expenseRatioPercent,payoutCycle,riskLevel,description,strengths,weaknesses,suitableFor,dataAsOf,dataNote
+SCHD,Schwab U.S. Dividend Equity ETF,Charles Schwab,DividendGrowth,3.5,0.06,Quarterly,Medium,미국 배당 성장주에 투자하는 ETF입니다.,배당 성장 성격;상대적으로 낮은 운용보수;장기 투자에 적합,고배당 인컴 ETF 대비 분배율이 낮을 수 있음;시장 하락 위험 존재,장기 배당 성장 투자자;낮은 비용을 선호하는 투자자,2026-06-01,초기 MVP용 정적 데이터이며 추후 검증 필요
+JEPI,JPMorgan Equity Premium Income ETF,J.P. Morgan,CoveredCall,7.5,0.35,Monthly,Medium,커버드콜 기반 인컴 ETF입니다.,월배당 성격;상대적으로 높은 배당수익률;인컴 투자에 적합,상승장 수익률 제한 가능성;옵션 전략 이해 필요,월 현금흐름을 원하는 투자자;높은 배당수익률을 원하는 투자자,2026-06-01,초기 MVP용 정적 데이터이며 추후 검증 필요
+JEPQ,JPMorgan Nasdaq Equity Premium Income ETF,J.P. Morgan,CoveredCall,9.0,0.35,Monthly,High,나스닥 기반 커버드콜 ETF입니다.,월배당 성격;기술주 기반 인컴;높은 분배율 추구,성장주 변동성 영향;상승장 수익률 제한 가능성,기술주 기반 인컴 투자자;높은 월분배금을 원하는 투자자,2026-06-01,초기 MVP용 정적 데이터이며 추후 검증 필요
+QQQI,NEOS Nasdaq 100 High Income ETF,NEOS,CoveredCall,12.0,0.68,Monthly,High,나스닥 기반 고배당 또는 옵션 인컴 성격 ETF입니다.,월배당 성격;높은 분배율 추구;나스닥 기반 인컴 전략,초기 데이터 검증 필요;옵션 전략과 기술주 변동성 위험,높은 분배율을 추구하는 투자자;나스닥 기반 인컴 투자자,2026-06-01,초기 MVP용 정적 데이터이며 추후 검증 필요
+QYLD,Global X Nasdaq 100 Covered Call ETF,Global X,CoveredCall,11.0,0.60,Monthly,High,나스닥 100 커버드콜 ETF입니다.,월배당 성격;높은 분배율 추구;나스닥 100 기반,장기 가격 상승 제한 가능성;옵션 전략에 따른 기회비용,높은 분배율을 추구하는 투자자;월배당 ETF 선호 투자자,2026-06-01,초기 MVP용 정적 데이터이며 추후 검증 필요

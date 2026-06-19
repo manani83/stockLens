@@ -34,7 +34,7 @@ export function PopularETFCard({ etf }: PopularETFCardProps) {
           className="rounded-md border border-slate-300 px-3 py-2 text-center text-sm font-bold text-slate-700 transition hover:bg-slate-50"
           href={`/etf/${etf.ticker.toLowerCase()}`}
         >
-          상세 보기
+          {etf.ticker} 상세 보기
         </Link>
         <AddToWatchlistButton ticker={etf.ticker} />
       </div>

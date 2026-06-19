@@ -41,3 +41,44 @@
 - 내부 링크 섹션은 메인, ETF 상세, 비교, 랭킹, 시뮬레이션 주요 페이지에서 공통으로 사용한다.
 - sitemap은 `NEXT_PUBLIC_SITE_URL`을 우선 사용하고, 없으면 `http://localhost:3000`을 기본값으로 사용한다.
 - robots.txt는 모든 검색 엔진을 허용하고 sitemap URL을 제공한다.
+- 수익화 준비는 실제 광고 스크립트나 제휴 URL 없이 placeholder와 고지 문구만 제공한다.
+- 광고 영역은 계산 입력과 결과를 가리지 않는 위치에 배치하고, 콘텐츠와 구분되는 dashed border/muted background를 사용한다.
+- 증권사/브로커 제휴 영역은 특정 증권사를 추천하지 않는 중립적 placeholder로 유지한다.
+- ETF 데이터는 `dataAsOf`와 `dataNote`를 포함해 기준일과 참고용 정적 데이터임을 화면에 표시한다.
+- 데이터 최신성 안내는 상세/랭킹 중심으로 표시하고, 비교/시뮬레이션에는 공식 자료 확인 안내를 표시한다.
+- 데이터 자동 업데이트, 외부 API 연동, 크롤링, 자동 배치는 이번 단계에서 제외하고 문서화만 한다.
+- 운영/배포 준비는 실제 배포 없이 체크리스트, 환경변수, 법적 고지 문서로 관리한다.
+- 현재 MVP의 배포 가능 여부는 테스트, lint, build 통과 후에도 ETF 수치와 법적 문구를 사람이 확인한 뒤 판단한다.
+- 배당락/실적 캘린더는 외부 API나 크롤링 없이 `src/data/calendarData.ts`의 정적 예시 데이터로 구현한다.
+- 캘린더 이벤트는 날짜 오름차순으로 제공하고, ticker와 이벤트 유형 필터만 우선 지원한다.
+- 알림 규칙은 `dividend-lab-alert-rules` localStorage key에 저장하며 실제 푸시, 이메일, 서버 스케줄러는 구현하지 않는다.
+- 알림 규칙은 목표 가격, 목표 배당률, 배당락일/지급일 N일 전 조건을 저장하는 준비 중 기능으로 표시한다.
+- 포트폴리오는 `dividend-lab-portfolio` localStorage key에 저장하며 로그인, DB, 증권사 연동은 제외한다.
+- 포트폴리오 예상 배당금은 저장된 투자금 또는 수량과 평균단가, 고정 환율, ETF 정적 배당률을 기반으로 계산한다.
+- localStorage 기반 신규 UI는 클라이언트 컴포넌트에서 mount 이후 저장 데이터를 읽어 hydration 문제를 피한다.
+- 포트폴리오 배당 캘린더는 저장된 포트폴리오 ticker와 정적 캘린더 데이터를 조합하며 외부 캘린더 라이브러리는 사용하지 않는다.
+- 포트폴리오 캘린더 요약은 보유 ticker 수, 관련 이벤트 수, 예정 이벤트 수, 다음 이벤트 정보를 제공한다.
+- 백업/복원은 관심종목, 알림 규칙, 포트폴리오 localStorage 데이터만 대상으로 하고 서버 저장이나 클라우드 동기화는 제외한다.
+- 백업 가져오기는 Replace와 Merge 모드를 제공하며 병합 중복 기준은 watchlist ticker, alertRules id, portfolio id로 정한다.
+- UI/UX 공통화는 `PageContainer`, `PageHero`, `SectionCard`, `InfoCard`, `ActionButton`, `EmptyState`, `NoticeBox`를 추가하고 기능 로직 변경 없이 점진 적용한다.
+- 공통 컴포넌트는 기존 Tailwind 스타일을 유지하는 얇은 래퍼로 두어 대규모 화면 재작성 위험을 줄인다.
+- 성능 최종 점검에서는 신규 라이브러리를 추가하지 않고 클라이언트 컴포넌트 범위를 상호작용/localStorage 필요 컴포넌트로 유지한다.
+- 접근성 개선으로 모호한 상세 링크 텍스트에 ticker를 포함해 이동 목적을 명확히 한다.
+- SEO 회귀 방지를 위해 `seo` helper와 `siteUrl` helper 테스트를 추가한다.
+- 릴리즈 후보 상태는 테스트, lint, typecheck, build 통과 기준으로 조건부 배포 가능으로 판단하되 실제 도메인, 데이터 최신성, 법적 문구는 사람이 확인해야 한다.
+- 실서비스 데이터 전환 준비는 외부 API를 바로 붙이지 않고 `dataSource` 도메인의 정적 설정과 freshness helper로 추상화한다.
+- 데이터 소스 후보는 Static, Manual, Csv, ExternalApi, AdminManaged 유형으로 나누고 현재는 Static ETF/Calendar 데이터만 Active로 둔다.
+- 분석도구 준비는 `trackEvent` no-op helper와 이벤트 타입 정의까지만 구현하고 GA4/GTM 스크립트 삽입은 별도 작업으로 분리한다.
+- 분석 payload는 ticker, page, category 같은 최소 정보만 허용하고 메모, 백업 원문, localStorage 원문 데이터는 전송하지 않는다.
+- SEO 콘텐츠 확장은 CMS나 MDX 없이 정적 `guideArticles` 데이터와 `/guides/[slug]` App Router 페이지로 시작한다.
+- 가이드 콘텐츠는 투자 추천이 아닌 교육/계산 안내 중심으로 작성하고 관련 도구와 내부 링크를 제공한다.
+- 실데이터 연동은 API 구현 전에 후보 유형, 선택 기준, 라이선스 리스크 체크리스트를 문서화한 뒤 진행한다.
+- 현재 실데이터 전환 1순위는 외부 ETF API가 아니라 CSV 기반 수동 업데이트와 변경 이력 관리로 둔다.
+- ETF CSV import는 관리자 화면, 서버 업로드, DB 저장 없이 순수 parser와 템플릿으로만 준비한다.
+- CSV parser는 외부 라이브러리를 추가하지 않고 단순 쉼표 구분 CSV만 지원하며 quoted CSV와 쉼표 포함 텍스트는 운영 제한사항으로 둔다.
+- 콘텐츠와 ETF 데이터 운영은 월간 체크리스트와 운영 런북을 기준으로 사람이 확인하고, 배포 전 테스트와 build를 필수 확인한다.
+- 보안/개인정보 점검은 현재 MVP가 개인정보를 수집하지 않고 localStorage에 관심종목, 알림 규칙, 포트폴리오만 저장하는 구조로 문서화한다.
+- 실제 광고, GA4/GTM, 제휴 스크립트는 v0.1.0에 삽입하지 않고 도입 정책 문서와 decision-log 기록 규칙만 둔다.
+- 전역 404/error 페이지와 공통 상태 컴포넌트를 추가하되 외부 오류 로깅 서비스는 도입하지 않는다.
+- 존재하지 않는 ETF, 잘못된 compare pair, 없는 guide slug는 notFound throw 대신 사용자 안내와 주요 링크를 제공한다.
+- v0.1.0 패키징은 조건부 배포 가능 상태로 정리하며 실제 도메인, ETF 데이터 최신성, 모바일 화면, 법적 문구는 사람이 sign-off한다.

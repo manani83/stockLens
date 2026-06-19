@@ -1,6 +1,9 @@
 import type { ETFDividendInfo } from "../domain/etf/etfTypes";
 
 // 투자 판단용 실시간 데이터가 아닙니다. 모든 수치는 초기값이며 추후 검증 필요합니다.
+const DATA_AS_OF = "2026-06-01";
+const DATA_NOTE = "초기 MVP용 정적 데이터이며 추후 검증 필요";
+
 export const etfData: ETFDividendInfo[] = [
   {
     ticker: "SCHD",
@@ -16,6 +19,8 @@ export const etfData: ETFDividendInfo[] = [
     strengths: ["배당 성장 성격", "상대적으로 낮은 운용보수", "장기 투자에 적합"],
     weaknesses: ["고배당 인컴 ETF 대비 분배율이 낮을 수 있음", "시장 하락 위험 존재"],
     suitableFor: ["장기 배당 성장 투자자", "낮은 비용을 선호하는 투자자"],
+    dataAsOf: DATA_AS_OF,
+    dataNote: DATA_NOTE,
   },
   {
     ticker: "JEPI",
@@ -31,6 +36,8 @@ export const etfData: ETFDividendInfo[] = [
     strengths: ["월배당 성격", "상대적으로 높은 배당수익률", "인컴 투자에 적합"],
     weaknesses: ["상승장 수익률 제한 가능성", "옵션 전략 이해 필요"],
     suitableFor: ["월 현금흐름을 원하는 투자자", "높은 배당수익률을 원하는 투자자"],
+    dataAsOf: DATA_AS_OF,
+    dataNote: DATA_NOTE,
   },
   {
     ticker: "JEPQ",
@@ -46,6 +53,8 @@ export const etfData: ETFDividendInfo[] = [
     strengths: ["월배당 성격", "기술주 기반 인컴", "높은 분배율 추구"],
     weaknesses: ["성장주 변동성 영향", "상승장 수익률 제한 가능성"],
     suitableFor: ["기술주 기반 인컴 투자자", "높은 월분배금을 원하는 투자자"],
+    dataAsOf: DATA_AS_OF,
+    dataNote: DATA_NOTE,
   },
   {
     ticker: "QQQI",
@@ -61,6 +70,8 @@ export const etfData: ETFDividendInfo[] = [
     strengths: ["월배당 성격", "높은 분배율 추구", "나스닥 기반 인컴 전략"],
     weaknesses: ["초기 데이터 검증 필요", "옵션 전략과 기술주 변동성 위험"],
     suitableFor: ["높은 분배율을 추구하는 투자자", "나스닥 기반 인컴 투자자"],
+    dataAsOf: DATA_AS_OF,
+    dataNote: DATA_NOTE,
   },
   {
     ticker: "QYLD",
@@ -76,5 +87,7 @@ export const etfData: ETFDividendInfo[] = [
     strengths: ["월배당 성격", "높은 분배율 추구", "나스닥 100 기반"],
     weaknesses: ["장기 가격 상승 제한 가능성", "옵션 전략에 따른 기회비용"],
     suitableFor: ["높은 분배율을 추구하는 투자자", "월배당 ETF 선호 투자자"],
+    dataAsOf: DATA_AS_OF,
+    dataNote: DATA_NOTE,
   },
 ];

@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { DataFreshnessNotice } from "@/components/data";
+import { AffiliateDisclosure, AdPlaceholder } from "@/components/monetization";
 import { ETFRankingTable, RankingIntro } from "@/components/rankings";
 import { InternalLinkSection } from "@/components/seo/InternalLinkSection";
 import { getAllEtfs } from "@/domain/etf/etfRepository";
@@ -22,8 +24,11 @@ export default function MonthlyDividendEtfsPage() {
         title="월배당 ETF 순위"
         description="매월 분배금을 지급하는 성격의 ETF를 확인해보세요."
       />
+      <DataFreshnessNotice dataAsOf={etfs[0]?.dataAsOf} />
       <ETFRankingTable etfs={etfs} />
+      <AdPlaceholder slotName="monthly-rankings-table-bottom" />
       <InternalLinkSection />
+      <AffiliateDisclosure />
     </main>
   );
 }
